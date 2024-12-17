@@ -5,16 +5,16 @@ const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const mongoSanitize = require("express-mongo-sanitize");
 const connectDB = require("./config/db");
-const authRoutes = require('./routes/authRoutes');
-const teamRoutes = require('./routes/teamRoutes');
-const contactRoutes = require('./routes/contactRoutes');
-const servicesRoutes = require('./routes/servicesRoutes');
-const blogRoutes = require('./routes/blogRoutes');
-const propertyRoutes = require('./routes/propertyRoutes');
+const authRoutes = require("./routes/authRoutes");
+const teamRoutes = require("./routes/teamRoutes");
+const contactRoutes = require("./routes/contactRoutes");
+const servicesRoutes = require("./routes/servicesRoutes");
+const blogRoutes = require("./routes/blogRoutes");
+const propertyRoutes = require("./routes/propertyRoutes");
 const testimonialRoutes = require("./routes/testimonialRoutes");
 const secondSectionRoutes = require("./routes/secondSectionRoutes");
-const partnerRoutes = require('./routes/partnerRoutes');
-const sliderRoutes = require('./routes/sliderRoutes');
+const partnerRoutes = require("./routes/partnerRoutes");
+const sliderRoutes = require("./routes/sliderRoutes");
 const valueRoutes = require("./routes/valuRoutes");
 const heroSectionRoutes = require("./routes/heroSectionRoutes");
 const keystatsRoutes = require("./routes/keystateRoutes");
@@ -24,10 +24,10 @@ const laxuryRoutes = require("./routes/laxuryRoutes");
 const imageServices = require("./routes/imageServicesRoutes");
 
 const { errorHandler } = require("./middleware/errormiddleware");
-const test="jjj"
+const test = "jjj";
 
 const app = express();
-app.use('/images', express.static('images'));
+app.use("/images", express.static("images"));
 // Connect MongoDB
 connectDB();
 
@@ -46,30 +46,31 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // CORS Configuration
-const corsOptions = { 
-    origin: [
-      "http://localhost:3000",  // Allow local development
-      "http://192.168.1.6:3000",  // Allow local development with specific IP
-      "https://joyav3.vercel.app",  // Allow production frontend URL
-      "https://joya-proprties-front.vercel.app", 
-    ], 
-    methods: ["GET", "POST", "PUT", "DELETE"],  // Allowed HTTP methods
-    allowedHeaders: ["Content-Type", "Authorization"],  // Allowed headers
-  };
-  
-  app.use(cors(corsOptions));  // Enable CORS with the updated options
-  
+const corsOptions = {
+  origin: [
+    "http://localhost:3000", // Allow local development
+    "http://192.168.1.6:3000", // Allow local development with specific IP
+    "https://joyav3.vercel.app", // Allow production frontend URL
+    "https://joya-proprties-front.vercel.app",
+    "https://joyaproperties.com",
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+  allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+};
+
+app.use(cors(corsOptions)); // Enable CORS with the updated options
+
 // Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/team', teamRoutes);
-app.use('/api/contact', contactRoutes);
-app.use('/api/services', servicesRoutes);
-app.use('/api/blog', blogRoutes);
-app.use('/api/property', propertyRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/team", teamRoutes);
+app.use("/api/contact", contactRoutes);
+app.use("/api/services", servicesRoutes);
+app.use("/api/blog", blogRoutes);
+app.use("/api/property", propertyRoutes);
 app.use("/api/testimonial", testimonialRoutes);
 app.use("/api/secondsection", secondSectionRoutes);
-app.use('/api/partner', partnerRoutes);
-app.use('/api/slider', sliderRoutes);
+app.use("/api/partner", partnerRoutes);
+app.use("/api/slider", sliderRoutes);
 app.use("/api/values", valueRoutes);
 app.use("/api/hero-sections", heroSectionRoutes);
 app.use("/api/keystats", keystatsRoutes);
@@ -78,13 +79,12 @@ app.use("/api/feature", featureRoutes);
 app.use("/api/laxury", laxuryRoutes);
 app.use("/api/image-services", imageServices);
 
+app.get("/", (req, res) => {
+  res.send("API is running");
+});
 
-app.get('/', (req, res) => {
-    res.send('API is running');
-  });
-  
 // Error Handler
-app.use(errorHandler);  // Enable custom error handling
+app.use(errorHandler); // Enable custom error handling
 
 // Start Server
 const PORT = process.env.PORT || 5000;
