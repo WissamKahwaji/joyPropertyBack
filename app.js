@@ -53,13 +53,13 @@ const corsOptions = {
     "https://joyav3.vercel.app", // Allow production frontend URL
     "https://joya-proprties-front.vercel.app",
     "https://joyaproperties.com",
-    "http://joyback.siidevelopment.com/",
+    "http://joyback.siidevelopment.com",
   ],
   methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
   allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
 };
 
-app.use(cors()); // Enable CORS with the updated options
+app.use(cors(corsOptions)); // Enable CORS with the updated options
 
 // Routes
 app.use("/api/auth", authRoutes);
