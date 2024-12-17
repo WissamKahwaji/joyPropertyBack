@@ -59,7 +59,7 @@ const corsOptions = {
   allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
 };
 
-app.use(cors(corsOptions)); // Enable CORS with the updated options
+app.use(cors()); // Enable CORS with the updated options
 
 // Routes
 app.use("/api/auth", authRoutes);
