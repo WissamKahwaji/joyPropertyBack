@@ -10,8 +10,8 @@ const cerateService = asyncHandler(async (req, res) => {
 });
 //get all services
 const getAllServices = asyncHandler(async (req, res) => {
-  // const serviceList = await services.find();
-  res.status(200).json("serviceList");
+  const serviceList = await services.find();
+  res.status(200).json(serviceList);
 });
 
 //update a service
